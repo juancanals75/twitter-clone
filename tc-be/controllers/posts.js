@@ -4,7 +4,11 @@ export const getPosts = async (req, res) => {
 	try {
 		const postMessagesArray = await PostMessage.find()
 
-		res.status(200).json(postMessagesArray)
+		// res.status(200).json(postMessagesArray)
+		res.status(200).json({
+			total_messages: postMessagesArray.length,
+			messages: postMessagesArray,
+		})
 	} catch (error) {
 		res.status(404).json({ message: error.message })
 	}
