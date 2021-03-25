@@ -5,6 +5,7 @@ export const getPosts = async (req, res) => {
 		const postMessagesArray = await PostMessage.find()
 
 		// res.status(200).json(postMessagesArray)
+		console.log(req.body)
 		res.status(200).json({
 			total_messages: postMessagesArray.length,
 			messages: postMessagesArray,
@@ -15,16 +16,13 @@ export const getPosts = async (req, res) => {
 }
 
 export const createPost = async (req, res) => {
-	const post = req.body
-
-	const newPost = new PostMessage(post)
+	console.log(req.body)
+	const post = new PostMessage(req.body)
 
 	try {
-		await newPost.save()
-
+		const newPost = await post.save()
 		res.status(201).json(newPost)
 	} catch (error) {
 		res.status(409).json({ message: error.message })
 	}
-	res.send('Se está creando algo')
 }
