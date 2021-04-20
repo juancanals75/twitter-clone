@@ -3,7 +3,7 @@ import bodyParser from 'body-parser'
 import mongoose from 'mongoose'
 import cors from 'cors'
 
-import postRoutes from './routes/posts.js'
+import tweetRoutes from './routes/tweets.js'
 
 const app = express()
 
@@ -11,7 +11,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(cors())
 
-app.use('/posts', postRoutes)
+app.use('/tweets', tweetRoutes)
 
 const PORT = process.env.PORT || 5000
 
