@@ -4,6 +4,7 @@ import mongoose from 'mongoose'
 import cors from 'cors'
 
 import tweetRoutes from './routes/tweets.js'
+import userRoutes from './routes/users.js'
 
 const app = express()
 
@@ -12,6 +13,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use(cors())
 
 app.use('/tweets', tweetRoutes)
+app.use('', userRoutes)
 
 const PORT = process.env.PORT || 5000
 
