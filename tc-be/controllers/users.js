@@ -2,19 +2,23 @@ import User from '../models/user.js'
 
 export const createNewUser = async (req, res) => {
 	const user = new User(req.body)
-
 	try {
+		// Check if the username contains uppercase or symbols
+		if (/[^a-z0-9]+/.test(user.username)) {
+			throw new Error(
+				"username can't contain uppercase letters or symbols"
+			)
+		}
 		const existingUsername = await User.findOne({
 			username: user.username,
 		})
 		if (existingUsername) {
 			throw new Error('Username already taken')
-		} else {
-			const newUser = await user.save()
-			res.status(201).json({
-				message: 'User created succesfully',
-			})
 		}
+		const newUser = await user.save()
+		res.status(201).json({
+			message: `User: ${newUser.username} was created succesfully`,
+		})
 	} catch (error) {
 		res.status(404).json({
 			message: error.message,
