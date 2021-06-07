@@ -9,6 +9,16 @@ export const createNewUser = async (req, res) => {
 				"username can't contain uppercase letters or symbols"
 			)
 		}
+
+		if (
+			(user.password.length < 5) |
+			(user.password.length > 20) |
+			user.password.includes(user.username)
+		) {
+			throw new Error(
+				"password must be between 5 and 20 characters long and can't contain the username"
+			)
+		}
 		const existingUsername = await User.findOne({
 			username: user.username,
 		})
