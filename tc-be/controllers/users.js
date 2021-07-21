@@ -41,6 +41,7 @@ export const loginValidation = async (req, res) => {
 		const user = await User.findOne({
 			username: req.body.username,
 		})
+		if (!user) throw new Error('Username not found.')
 		if (user.password === req.body.password) {
 			res.status(200).json({
 				message: 'Succesful login',
