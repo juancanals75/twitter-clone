@@ -2,6 +2,7 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import mongoose from 'mongoose'
 import cors from 'cors'
+import serverless from 'serverless-http'
 
 import tweetRoutes from './routes/tweets.js'
 import userRoutes from './routes/users.js'
@@ -30,3 +31,5 @@ mongoose
 	.catch(error => console.log(`CONNECTION ERROR: ${error.message}`))
 
 mongoose.set('useFindAndModify', false)
+
+module.exports.handler = serverless(app)
